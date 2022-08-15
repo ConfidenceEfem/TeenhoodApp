@@ -63,7 +63,7 @@ const AskModal = ({ toggle, setToggle }) => {
         console.log(res.data.data);
         navigate('/questions');
         onToggle();
-        window.location.reload();
+        // window.location.reload();
       } else {
         const res1 = await axios.post(`${mainUrl}/ask`, { name, question });
         if(res1){
@@ -72,7 +72,7 @@ const AskModal = ({ toggle, setToggle }) => {
         dispatch(user(res1.data.data));
         navigate('/questions');
         onToggle();
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       console.log(error);
