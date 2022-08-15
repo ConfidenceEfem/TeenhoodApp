@@ -57,6 +57,7 @@ const QuestionMainScreen = () => {
         <QuestionComp>
           <QuestionCompWrapper>
             {data.map((props) => (
+              props?.question !== "Admin"? 
               <QuestionCard>
                 <MyProfile user={props?.user} date={props?.createdAt}/>
                 <QuestionText>{props?.question}</QuestionText>
@@ -96,7 +97,7 @@ const QuestionMainScreen = () => {
                       }}>Update Question</UpdateButton>
                   </EditAndButton>
                 ) : null}
-              </QuestionCard>
+              </QuestionCard>:null
             ))}
           </QuestionCompWrapper>
         </QuestionComp>
