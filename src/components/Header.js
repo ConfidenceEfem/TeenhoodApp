@@ -17,11 +17,11 @@ const Header = ({ toggle, setToggle }) => {
         <RightNavs>
           <Question onClick={onToggle}>Ask a Question</Question>
           <a
-            href="https://bit.ly/teenhoodinandout"
+            href="https://bit.ly/agteens"
             target="_blank"
             style={{ textDecoration: 'none' }}
           >
-            <Register>Register</Register>
+            <Register>About Us</Register>
           </a>
         </RightNavs>
         <Icon

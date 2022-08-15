@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { user } from './reduxpersist/actions';
 import { useNavigate } from 'react-router-dom';
+import ScaleLoader from "react-spinners/ScaleLoader"
 
 const AskModal = ({ toggle, setToggle }) => {
   const onToggle = () => {
@@ -16,6 +17,8 @@ const AskModal = ({ toggle, setToggle }) => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const [loading, setLoading] = React.useState(false)
 
   const selector = useSelector((state) => state.persistedReducer.currentTeen);
 
@@ -36,6 +39,7 @@ const AskModal = ({ toggle, setToggle }) => {
 
   const submit = handleSubmit(async (data) => {
     const { name, question } = data;
+    
 
     try {
       const config = {
@@ -46,18 +50,25 @@ const AskModal = ({ toggle, setToggle }) => {
 
       const url = 'http://localhost:2019';
       const mainUrl = 'https://teenhood.herokuapp.com';
+      setLoading(true)
       if (selector?.token && selector?.data?.name === name) {
         const res = await axios.post(
           `${mainUrl}/ask`,
           { name, question },
           config
         );
+        if(res){
+          setLoading(false)
+        }
         console.log(res.data.data);
         navigate('/questions');
         onToggle();
         window.location.reload();
       } else {
         const res1 = await axios.post(`${mainUrl}/ask`, { name, question });
+        if(res1){
+          setLoading(false)
+        }
         dispatch(user(res1.data.data));
         navigate('/questions');
         onToggle();
@@ -81,7 +92,10 @@ const AskModal = ({ toggle, setToggle }) => {
             defaultValue={selector?.data?.name}
           />
           <TextArea placeholder="Ask your Question" {...register('question')} />
-          <Submit type="submit">Submit Question</Submit>
+          <div style={{display:"flex", alignItems: "center"}}><Submit type="submit">Submit Question</Submit>
+          
+          {loading?<ScaleLoader color='blue' /> :null}
+          </div>
         </CardWrapper>
       </Card>
     </Container>

@@ -5,9 +5,9 @@ const HeroPage = ({ toggle, setToggle }) => {
     <Container>
       <Wrapper>
         <ChurchName>Assemblies of God Church</ChurchName>
-        <ChurchSub>Amore Sectional Teens Department</ChurchSub>
+        <ChurchSub>Apapa District Teens Department</ChurchSub>
         <Topic>
-          <span>Presents:</span>Teenhood In And Out
+          <span>Presents:</span>Walking in Dominion👑👑
         </Topic>
         <ButtonHolder>
           <Question
@@ -18,11 +18,11 @@ const HeroPage = ({ toggle, setToggle }) => {
             Ask a Question
           </Question>
           <a
-            href="https://bit.ly/teenhoodinandout"
+            href="https://bit.ly/agteens"
             target="_blank"
             style={{ textDecoration: 'none' }}
           >
-            <Register>Register</Register>
+            <Register>About Us</Register>
           </a>
         </ButtonHolder>
       </Wrapper>

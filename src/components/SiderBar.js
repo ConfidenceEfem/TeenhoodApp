@@ -27,7 +27,7 @@ const SiderBar = ({ showBar, setShowBar, toggle, setToggle, onToggle }) => {
             Ask A Question
           </Reigster>
           <a
-            href="https://bit.ly/teenhoodinandout"
+            href="https://bit.ly/agteens"
             target="_blank"
             style={{
               width: '100%',
@@ -39,7 +39,7 @@ const SiderBar = ({ showBar, setShowBar, toggle, setToggle, onToggle }) => {
                 setShowBar(!showBar);
               }}
             >
-              Register
+             About Us
             </Reigster>
           </a>
 

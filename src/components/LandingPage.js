@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AskModal from './AskModal';
 import Header from './Header';
 import HeroPage from './HeroPage';
-import img from './images/img.png';
+import img from './images/walking.jpg';
 
 const LandingPage = () => {
   const [toggle, setToggle] = React.useState(false);
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   height: 100%;
   flex-direction: column;
   align-items: center;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.7);
 `;
 const Container = styled.div`
   width: 100%;
@@ -36,5 +36,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-image: url(${img});
-  background-size: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 `;

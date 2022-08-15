@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 
-const MyProfile = ({ user }) => {
+const MyProfile = ({ user,date }) => {
   const [data, setData] = React.useState([]);
 
   const fetchData = async () => {
@@ -23,7 +23,7 @@ const MyProfile = ({ user }) => {
       <Icon>{data?.name?.charAt(0)}</Icon>
       <NameAndTime>
         <Name style={{ marginLeft: '0px' }}>{data?.name}</Name>
-        <Time>{moment(data?.createdAt).fromNow()}</Time>
+        <Time>{moment(date).fromNow()}</Time>
       </NameAndTime>
     </ProfileAndName>
   );

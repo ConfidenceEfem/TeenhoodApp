@@ -12,11 +12,20 @@ const QuestionMainScreen = () => {
 
   const [data, setData] = React.useState([]);
   const [userData, setUserData] = React.useState([]);
+  const [question, setQuestion] = React.useState("")
 
-  const onToggle = () => {
-    setToggle(!toggle);
+  const updateToggle = async (id,toggle) => {
+    const url = 'http://localhost:2019';
+    const mainUrl = 'https://teenhood.herokuapp.com';
+    await axios.post(`${mainUrl}/question/toggle/${id}`, {toggle: !toggle});
+    window.location.reload();
   };
-
+  const EditQuestion = async (id) => {
+    const url = 'http://localhost:2019';
+    const mainUrl = 'https://teenhood.herokuapp.com';
+    await axios.post(`${mainUrl}/question/edit/${id}`, {question});
+    window.location.reload();
+  };
   const deleteQuestion = async (id) => {
     const url = 'http://localhost:2019';
     const mainUrl = 'https://teenhood.herokuapp.com';
@@ -49,7 +58,7 @@ const QuestionMainScreen = () => {
           <QuestionCompWrapper>
             {data.map((props) => (
               <QuestionCard>
-                <MyProfile user={props?.user} />
+                <MyProfile user={props?.user} date={props?.createdAt}/>
                 <QuestionText>{props?.question}</QuestionText>
                 {selector?.data?._id === props?.user ? (
                   <ButtonHolder>
@@ -60,18 +69,33 @@ const QuestionMainScreen = () => {
                     >
                       Delete
                     </DeleteButton>
+                    <EditButton 
+                    onClick={()=>{
+                      updateToggle(props?._id, props?.toggle)
+                    }}
+                    >Edit Question</EditButton>
                   </ButtonHolder>
                 ) : null}
-                {/* 
-                {toggle ? (
+                
+                {props?.toggle ? (
                   <EditAndButton>
                     <Input
-                      placeholder="Gen Z HackFest is an annual three-day virtual hackathon and a
-                one-day"
+                  
+                      placeholder="Update Your Question" value={question}
+                defaultValue={props?.question}
+               
+                onChange={(e)=>{
+                  setQuestion(e.target.value)
+                }}
+                
                     />
-                    <UpdateButton>Update Question</UpdateButton>
+                    <UpdateButton
+                      onClick={()=>{
+                        EditQuestion(props?._id)
+                        updateToggle(props?._id, props?.toggle)
+                      }}>Update Question</UpdateButton>
                   </EditAndButton>
-                ) : null} */}
+                ) : null}
               </QuestionCard>
             ))}
           </QuestionCompWrapper>
@@ -98,7 +122,7 @@ const QuestionMainScreen = () => {
 export default QuestionMainScreen;
 
 const UpdateButton = styled.div`
-  width: 30%;
+width: 35%;
   height: 50px;
   font-size: 14px;
   display: flex;
@@ -167,6 +191,7 @@ const DeleteButton = styled.div`
   color: red;
   border: 2px solid red;
   font-weight: 500;
+  margin-right: 10px;
   cursor: pointer;
   border-radius: 5px;
   transition: all ease-in-out 750ms;
@@ -199,7 +224,10 @@ const QuestionText = styled.div`
   margin-left: 50px;
   display: flex;
   flex-wrap: wrap;
+  // background-color: red;
   font-size: 15px;
+  justify-content: flex-start;
+
   @media screen and (max-width: 550px) {
     margin-left: 0px;
   }
@@ -230,10 +258,11 @@ const ProfileAndName = styled.div`
 const QuestionCard = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   padding-bottom: 35px;
   border-bottom: 1px solid lightgray;
   margin-bottom: 20px;
+
   height: auto;
   /* background-color: red; */
 `;
